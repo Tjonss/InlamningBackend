@@ -1,0 +1,34 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InlamningBackend.Models.Entities
+{
+    public class IssueEntity
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public string Title { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public DateTime Created { get; set; } = DateTime.Now;
+
+        [Required]
+        public DateTime Modified { get; set; } = DateTime.Now;
+
+        [Required]
+        public int StatusId { get; set; } = 1;
+
+        [Required]
+        public Guid UserId { get; set; }
+
+        public StatusEntity Status { get; set; }
+        public UserEntity User { get; set; }
+
+        public ICollection<CommentEntity> Comments { get; set; }
+
+    }
+}
