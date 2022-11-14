@@ -2,13 +2,15 @@
 using InlamningBackend.Models.Entities;
 using InlamningBackend.Models.Requests.CommentRequests;
 using InlamningBackend.Models.Responses.CommentResponses;
+using InlamningBackend.Models.Responses.UserResponses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace InlamningBackend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/comments")]
     [ApiController]
     public class CommentsController : ControllerBase
     {
@@ -44,5 +46,35 @@ namespace InlamningBackend.Controllers
             catch (Exception ex ) { Debug.WriteLine(ex.Message); }
             return new BadRequestResult();
             }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var comments = new List<CommentEntity>();
+                foreach (var comment in await _context.Comments.ToListAsync())
+                comments.Add(comment);
+                return new OkObjectResult(comments);
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            return new BadRequestResult();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCommentEntity(int id)
+        {
+            var commentEntity = await _context.Comments.FindAsync(id);
+            if (commentEntity == null)
+            {
+                return NotFound();
+            }
+
+            _context.Comments.Remove(commentEntity);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }

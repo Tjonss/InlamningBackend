@@ -30,5 +30,6 @@ namespace InlamningBackend.Models.Entities
 
         public ICollection<CommentEntity> Comments { get; set; }
 
+      
     }
 }

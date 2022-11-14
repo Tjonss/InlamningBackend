@@ -94,5 +94,20 @@ namespace InlamningBackend.Controllers
    
             return new BadRequestResult();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUserEntity(Guid id)
+        {
+            var userEntity = await _context.Users.FindAsync(id);
+            if (userEntity == null)
+            {
+                return NotFound();
+            }
+
+            _context.Users.Remove(userEntity);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

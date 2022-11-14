@@ -1,4 +1,5 @@
 ﻿
+using InlamningBackend.Models.Entities;
 using InlamningBackend.Models.Responses.CommentResponses;
 using InlamningBackend.Models.Responses.StatusResponses;
 using InlamningBackend.Models.Responses.UserResponses;
@@ -16,6 +17,7 @@ namespace InlamningBackend.Models.Responses.IssueResponses
 
         public UserResponse User { get; set; }
         public StatusResponse Status { get; set; }
-        public IEnumerable<CommentResponse> Comments { get; set; }
+        public ICollection<CommentEntity> Comments { get; set; }
+
     }
 }
