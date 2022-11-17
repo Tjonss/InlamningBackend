@@ -61,41 +61,6 @@ namespace InlamningBackend.Controllers
         {
             try
             {
-                /* var issues = new List<IssueResponse>();
-                 foreach (var issueEntity in await _context.Issues.Include(x => x.User).Include(x => x.Status).Include(x => x.Comments).ToListAsync())
-                 {
-                      var comments = new List<CommentEntity>();
-                     foreach (var comment in issueEntity.Comments)
-                         comments.Add(new CommentEntity
-                         {
-                             Id = comment.Id,
-                             Message = comment.Message,
-                             Created = comment.Created,
-                             UserId = comment.UserId
-                         });
-
-                     issues.Add(new IssueResponse
-                     {
-                         Id = issueEntity.Id,
-                         Title = issueEntity.Title,
-                         Description = issueEntity.Description,
-                         Created = issueEntity.Created,
-                         Modified = issueEntity.Modified,
-                         User = new UserResponse
-                         {
-                             Id = issueEntity.User.Id,
-                             FirstName = issueEntity.User.FirstName,
-                             LastName = issueEntity.User.LastName,
-                             Email = issueEntity.User.Email,
-                             PhoneNumber = issueEntity.User.PhoneNumber
-                         },
-                         Status = new StatusResponse
-                         {
-                             Id = issueEntity.Status.Id,
-                             Status = issueEntity.Status.Status
-                         },
-                         Comments = comments */
-
                 var issues = new List<IssueResponse>();
                     foreach (var issue in await _context.Issues.Include(x => x.Status).Include(x => x.User).Include(x => x.Comments).ToListAsync())
                     {
